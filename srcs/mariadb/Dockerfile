@@ -1,4 +1,4 @@
-FROM nginx
+FROM alpine:3.19.1
 
 EXPOSE 3306
 
