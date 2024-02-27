@@ -5,9 +5,8 @@ RUN apk --update add nginx
 COPY index.html /usr/share/nginx/html/index.html
 
 # RUN rm /etc/nginx/nginx.conf
+COPY conf/nginx.conf /etc/nginx/nginx.conf
 
-# COPY conf /etc/nginx
-
-# EXPOSE 443
+EXPOSE 443
 
 CMD ["nginx", "-g", "daemon off;"]
