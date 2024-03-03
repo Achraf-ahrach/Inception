@@ -1,15 +1,15 @@
+
 server {
-        listen 80;
-        listen 443 ssl http2;
-        listen [::]:443 ssl http2;
-        server_name localhost;
+    listen 80;
+    listen 443 ssl;
+    server_name aahrach.42.fr;
 
-        ssl_certificate /etc/ssl/certs/localhost.crt;
-        ssl_certificate_key /etc/ssl/private/localhost.key;
-        
-        ssl_protocols TLSv1.2 TLSv1.1 TLSv1;
+    root /usr/share/nginx/html;
 
-        root /var/www/html;
+    ssl_certificate /etc/ssl/certs/localhost.crt;
+    ssl_certificate_key /etc/ssl/private/localhost.key;
 
-        index index.html index.nginx-debian.html;
+    ssl_protocols TLSv1.2 TLSv1.1 TLSv1;
+
+    index index.html index.nginx-debian.html;
 }
