@@ -4,12 +4,22 @@ server {
     listen 443 ssl;
     server_name aahrach.42.fr;
 
-    root /usr/share/nginx/html;
+    root /usr/share/nginx/php;
 
     ssl_certificate /etc/ssl/certs/localhost.crt;
     ssl_certificate_key /etc/ssl/private/localhost.key;
 
     ssl_protocols TLSv1.2 TLSv1.1 TLSv1;
 
-    index index.html index.nginx-debian.html;
+    index index.php index.html index.htm index.nginx-debian.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+#specifies the location of the FastCGI server that will process PHP files.
+        fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+    }
 }

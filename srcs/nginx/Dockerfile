@@ -5,8 +5,6 @@ RUN apt update && apt install -y nginx
 
 # COPY index.html ./usr/share/nginx/html/index.html
 
-COPY index.html ./usr/share/nginx/html/index.html
-
 RUN apt install openssl
 
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout localhost.key -out localhost.crt \
