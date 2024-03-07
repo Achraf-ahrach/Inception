@@ -11,9 +11,11 @@ RUN chmod +x wp-cli.phar
 
 RUN mv wp-cli.phar /usr/local/bin/wp
 
+WORKDIR /var/www/html
+
 RUN wp --allow-root core download
 
-
+WORKDIR /
 
 EXPOSE 3306
 
