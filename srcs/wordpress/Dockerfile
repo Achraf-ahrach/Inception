@@ -15,6 +15,10 @@ WORKDIR /var/www/html
 
 RUN wp --allow-root core download
 
+RUN rm /etc/php/8.3/fpm/pool.d/www.conf
+
+COPY conf/default.conf /etc/php/8.3/fpm/pool.d/
+
 WORKDIR /
 
 EXPOSE 3306

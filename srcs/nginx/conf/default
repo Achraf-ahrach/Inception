@@ -4,7 +4,7 @@ server {
     listen 443 ssl;
     server_name aahrach.42.fr;
 
-    root /usr/share/nginx/html;
+    root /usr/share/nginx/html/;
 
     ssl_certificate /etc/ssl/certs/localhost.crt;
     ssl_certificate_key /etc/ssl/private/localhost.key;
@@ -18,8 +18,9 @@ server {
     }
 
     location ~ \.php$ {
+        # include snippets/fastcgi-php.conf;
         include snippets/fastcgi-php.conf;
-#specifies the location of the FastCGI server that will process PHP files.
-        fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+        #specifies the location of the FastCGI server that will process PHP files.
+        fastcgi_pass 127.0.0.1:9000;
     }
 }
