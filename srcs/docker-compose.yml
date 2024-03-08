@@ -7,26 +7,24 @@ services:
     build:
       context: ./nginx/
       dockerfile: Dockerfile
-    # networks:  
-    #   - test
+    networks:  
+      char
     volumes:
-      - type: bind
-        source: /d/Dev/docker/nginx-www/nginx/html/
-        target: /usr/share/nginx/html/
+      - wordpress:/usr/share/nginx/html/
+    ports:
+      - "443:443"
   
-  # wordpress:
-  #   image: wordpress
-  #   build:
-  #     context: ./wordpress/
-  #     dockerfile: Dockerfile
-  #   networks:
-  #     - docker-network
-  #   volumes:
-  #   - type: volume
-  #     source: wordpress
-  #     target: /var/www/html
-  #   depends_on: 
-  #     nginx
+  wordpress:
+    image: wordpress
+    build:
+      context: ./wordpress/
+      dockerfile: Dockerfile
+    networks:
+      char
+    volumes:
+    - wordpress:/var/www/html/
+    # depends_on: 
+    #   nginx
 
   # DB:
   #   image: mariadb

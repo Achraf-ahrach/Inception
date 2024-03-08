@@ -17,9 +17,11 @@ RUN wp --allow-root core download
 
 RUN rm /etc/php/8.3/fpm/pool.d/www.conf
 
-COPY conf/default.conf /etc/php/8.3/fpm/pool.d/
+COPY conf/www.conf /etc/php/8.3/fpm/pool.d/
 
 WORKDIR /
+
+RUN /usr/sbin/php-fpm8.3 
 
 EXPOSE 3306
 
