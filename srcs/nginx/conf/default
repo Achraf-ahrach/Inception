@@ -11,27 +11,13 @@ server {
 
     ssl_protocols TLSv1.2 TLSv1.1 TLSv1;
 
-    index index.php index.html index.htm index.nginx-debian.html;
+    index index.php index.html index.nginx-debian.html;
 
-    location / {
-    #if the request is for http://example.com/some-page, then $uri will be /some-page.
-    #this configuration ensures that all requests that don't match existing files or directories
-    # are sent to index.php, which acts as the main entry point for the PHP application.
-        try_files $uri $uri/ /index.php?$args;
-        # try_files $uri $uri/ =404;
-    }
+    location ~ \.php$ { 
 
-    location ~ \.php$ {
-        include snippets/fastcgi-php.conf;
-        #specifies the location of the FastCGI server that will process PHP files.
+        try_files $uri =404;
         fastcgi_pass my_wordpress_container:9000;
-
-
-        # fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        # fastcgi_pass my_wordpress_container:9000;
-        # fastcgi_index index.php;
-        # include fastcgi_params;
-        # fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        # fastcgi_param SCRIPT_NAME $fastcgi_script_name;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     }
 }
