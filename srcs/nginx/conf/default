@@ -1,5 +1,6 @@
 
 server {
+    listen 80;
     listen 443 ssl;
     server_name aahrach.42.fr;
 
@@ -21,11 +22,16 @@ server {
     }
 
     location ~ \.php$ {
-        # include snippets/fastcgi-php.conf;
         include snippets/fastcgi-php.conf;
-        fastcgi_index index.php;
         #specifies the location of the FastCGI server that will process PHP files.
         fastcgi_pass my_wordpress_container:9000;
 
+
+        # fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        # fastcgi_pass my_wordpress_container:9000;
+        # fastcgi_index index.php;
+        # include fastcgi_params;
+        # fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        # fastcgi_param SCRIPT_NAME $fastcgi_script_name;
     }
 }

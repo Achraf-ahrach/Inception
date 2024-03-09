@@ -3,7 +3,6 @@ version: '3'
 services:
 
   wordpress:
-    image: wordpress
     build:
       context: ./wordpress/
       dockerfile: Dockerfile
@@ -14,7 +13,6 @@ services:
       - wordpress:/var/www/html/
 
   nginx:
-    image: nginx
     build:
       context: ./nginx/
       dockerfile: Dockerfile
@@ -25,8 +23,8 @@ services:
       - wordpress:/usr/share/nginx/html/
     ports:
       - "443:443"
-    links:
-      - wordpress
+    # links:
+    #   - wordpress
 
 networks:
   char:

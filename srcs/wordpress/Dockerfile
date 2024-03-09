@@ -11,13 +11,15 @@ RUN chmod +x wp-cli.phar
 
 RUN mv wp-cli.phar /usr/local/bin/wp
 
-WORKDIR /var/www/html
-
-RUN wp --allow-root core download
-
 RUN rm /etc/php/8.3/fpm/pool.d/www.conf
 
 COPY conf/www.conf /etc/php/8.3/fpm/pool.d/
+
+WORKDIR /var/www/html/
+
+RUN wp --allow-root core download
+
+WORKDIR /
 
 EXPOSE 9000
 
