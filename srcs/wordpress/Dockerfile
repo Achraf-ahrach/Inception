@@ -19,10 +19,6 @@ RUN rm /etc/php/8.3/fpm/pool.d/www.conf
 
 COPY conf/www.conf /etc/php/8.3/fpm/pool.d/
 
-WORKDIR /
+EXPOSE 9000
 
-RUN /usr/sbin/php-fpm8.3 
-
-EXPOSE 3306
-
-# CMD ["nginx", "-g", "daemon off;"]
+CMD ["/usr/sbin/php-fpm8.3", "-F"]
