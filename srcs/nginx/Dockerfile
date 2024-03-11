@@ -1,11 +1,11 @@
 # FROM alpine:3.19.1
 FROM ubuntu:noble-20240212
 
-RUN apt update && apt install -y nginx
+RUN apt update && apt upgrade -y
+
+RUN apt install -y nginx openssl
 
 # COPY index.html ./usr/share/nginx/html/index.html
-
-RUN apt install openssl
 
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout localhost.key -out localhost.crt \
     -subj "/C=US/ST=State/L=City/O=Organization/OU=Organizational Unit/CN=localhost"

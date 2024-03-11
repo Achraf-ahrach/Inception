@@ -1,7 +1,9 @@
 # FROM alpine:3.19.1
 FROM ubuntu:noble-20240212
 
-RUN apt-get update && apt install -y curl
+RUN apt update && apt upgrade -y
+
+RUN apt install -y curl
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
@@ -16,8 +18,6 @@ COPY conf/www.conf /etc/php/8.3/fpm/pool.d/
 WORKDIR /var/www/html/
 
 RUN wp --allow-root core download
-
-WORKDIR /
 
 EXPOSE 9000
 

@@ -1,6 +1,5 @@
 
 server {
-    listen 80;
     listen 443 ssl;
     server_name aahrach.42.fr;
 
@@ -9,15 +8,14 @@ server {
     ssl_certificate /etc/ssl/certs/localhost.crt;
     ssl_certificate_key /etc/ssl/private/localhost.key;
 
-    ssl_protocols TLSv1.2 TLSv1.1 TLSv1;
+    ssl_protocols TLSv1.2 ;
 
-    index index.php index.html index.nginx-debian.html;
+    index index.php;
 
-    location ~ \.php$ { 
+    location ~ \.php$ {
 
-        try_files $uri =404;
         fastcgi_pass my_wordpress_container:9000;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        try_files $uri =404;
     }
 }
+
