@@ -20,7 +20,7 @@ services:
     networks:
       - char
     volumes:
-      - wordpress:/usr/share/nginx/html/
+      - wordpress:/var/www/html/
     ports:
       - "443:443"
     # links:

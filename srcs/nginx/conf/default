@@ -3,7 +3,7 @@ server {
     listen 443 ssl;
     server_name aahrach.42.fr;
 
-    root /usr/share/nginx/html/;
+    root /var/www/html/;
 
     ssl_certificate /etc/ssl/certs/localhost.crt;
     ssl_certificate_key /etc/ssl/private/localhost.key;
@@ -13,9 +13,7 @@ server {
     index index.php;
 
     location ~ \.php$ {
-
         fastcgi_pass my_wordpress_container:9000;
-        try_files $uri =404;
+        try_files $uri $uri/ =404;
     }
 }
-
