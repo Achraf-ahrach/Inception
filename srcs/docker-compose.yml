@@ -26,12 +26,6 @@ services:
     # links:
     #   - wordpress
 
-networks:
-  char:
-    name: char
-volumes:
-  wordpress:
-    name: wordpress
   # DB:
   #   image: mariadb
   #   build:
@@ -51,3 +45,10 @@ volumes:
   #     - inception-network
   #   depends_on:
   #     - nginx wordpress
+
+networks:
+  char:
+    name: char
+volumes:
+  wordpress:
+    name: wordpress
