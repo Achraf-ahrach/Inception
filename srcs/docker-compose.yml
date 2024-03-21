@@ -3,52 +3,47 @@ version: '3'
 services:
 
   wordpress:
-    build:
-      context: ./wordpress/
-      dockerfile: Dockerfile
-    container_name: my_wordpress_container
+    build: ./requirements/wordpress/
+    restart: always
+    container_name: wordpress
+    env_file:
+      - .env
     networks:
-      - char
+      - Shared
     volumes:
       - wordpress:/var/www/html/
 
   nginx:
-    build:
-      context: ./nginx/
-      dockerfile: Dockerfile
-    container_name: my_nginx_container
+    build: ./requirements/nginx/
+    restart: always
+    container_name: nginx
+    env_file:
+      - .env
     networks:
-      - char
+      - Shared
     volumes:
       - wordpress:/var/www/html/
     ports:
       - "443:443"
-    # links:
-    #   - wordpress
 
-  # DB:
-  #   image: mariadb
-  #   build:
-  #     context: ./mariadb/
-  #     dockerfile: Dockerfile
-  #   restart: always
-  #   environment:
-  #     MARIADB_USER: achraf
-  #     MARIADB_PASSWORD: my_cool_secre
-  #     MARIADB_DATABASE: exmple-database
-  #     MARIADB_ROOT_PASSWORD: my-secret-pw
-  #   volumes:
-  #     - type: bind
-  #       source: shared_volume
-  #       target: /var/lib/mysql
-  #   networks:
-  #     - inception-network
-  #   depends_on:
-  #     - nginx wordpress
+  db:
+    build: ./requirements/mariadb/
+    restart: always
+    container_name: mariadb
+    env_file:
+      - .env
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - Shared
+    # depends_on:
+    #   - nginx wordpress
 
 networks:
-  char:
-    name: char
+  Shared:
+    name: Shared
 volumes:
   wordpress:
     name: wordpress
+  mariadb:
+    name: mariadb
