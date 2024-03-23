@@ -25,6 +25,8 @@ services:
       - wordpress:/var/www/html/
     ports:
       - "443:443"
+    depends_on:
+      - wordpress
 
   db:
     build: ./requirements/mariadb/
@@ -36,14 +38,23 @@ services:
       - mariadb:/var/lib/mysql
     networks:
       - Shared
-    # depends_on:
-    #   - nginx wordpress
+    depends_on:
+      - wordpress
 
 networks:
   Shared:
     name: Shared
+
 volumes:
   wordpress:
     name: wordpress
+    driver_opts:
+      type: local
+      o: bind
+      device: /home/aahrach/data/wordpress
   mariadb:
     name: mariadb
+    driver_opts:
+      type: local
+      o: bind
+      device: /home/aahrach/data/mariadb

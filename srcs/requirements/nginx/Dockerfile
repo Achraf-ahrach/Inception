@@ -1,5 +1,4 @@
-# FROM alpine:3.19.1
-FROM ubuntu:noble-20240212
+FROM debian:bullseye
 
 RUN apt update && apt upgrade -y
 

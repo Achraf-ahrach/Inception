@@ -18,9 +18,13 @@ down:
 prune:
 	@docker system prune -af
 
-script:
-	@docker stop $$(docker ps -aq)
-	@docker rm $$(docker ps -qa)
-	@docker rmi -f $$(docker images -aq)
-	@docker volume rm mariadb wordpress
-	@docker network prune -f
+clean:
+	@docker stop $$(docker ps -aq) || true
+	@docker rm $$(docker ps -qa) || true
+	@docker rmi -f $$(docker images -aq) || true
+	@docker volume rm $$(docker volume ls -q) || true
+	@docker network prune -f || true
+
+fclean: clean
+
+re: fclean all
