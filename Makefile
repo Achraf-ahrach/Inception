@@ -19,12 +19,13 @@ prune:
 	@docker system prune -af
 
 clean:
-	@docker stop $$(docker ps -aq) || true
+	@docker stop $$(docker ps -q) || true
 	@docker rm $$(docker ps -qa) || true
 	@docker rmi -f $$(docker images -aq) || true
 	@docker volume rm $$(docker volume ls -q) || true
 	@docker network prune -f || true
 
 fclean: clean
+	@sudo rm -rf ~/data/wordpress/* ~/data/mariadb/*
 
 re: fclean all
