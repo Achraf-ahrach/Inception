@@ -5,7 +5,7 @@ RUN apt update && apt upgrade -y
 RUN apt install -y nginx openssl
 
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout localhost.key -out localhost.crt \
-    -subj "/C=US/ST=State/L=City/O=Organization/OU=Organizational Unit/CN=localhost"
+    -subj "/CN=aahrach.42.fr"
 
 RUN cp localhost.crt ./etc/ssl/certs/localhost.crt
 
@@ -15,4 +15,4 @@ COPY conf/default /etc/nginx/sites-enabled/
 
 EXPOSE 443
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx"]
